@@ -30,10 +30,6 @@ let persons = [
   },
 ];
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
 app.get('/', (req, res) => {
   res.send('Server is running on port 3001');
@@ -42,7 +38,7 @@ app.get('/', (req, res) => {
 app.get('/info', (req, res) => {
   const date = new Date();
   res.send(`<p>Phonebook has info for ${persons.length} people</p>
-    <p>${date}</p>`);
+  <p>${date}</p>`);
 });
 
 app.get('/api/persons', (req, res) => {
@@ -65,7 +61,7 @@ const newID = () => {
 
 app.post('/api/persons', (req, res) => {
   const body = req.body;
-
+  
   if (!body.name || !body.number) {
     return res.status(400).json({
       error: 'Entry needs name and number.',
@@ -75,14 +71,19 @@ app.post('/api/persons', (req, res) => {
       error: 'Name must be unique.',
     });
   }
-
+  
   const person = {
     id: newID(),
     name: body.name,
     number: body.number,
   };
-
+  
   persons = persons.concat(person);
-
+  
   res.json(person);
+});
+
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
