@@ -1,11 +1,19 @@
-const express = require('express');
-const morgan = require('morgan');
-const app = express();
-const cors = require('cors');
-app.use(express.json());
-app.use(cors());
+// const express = require('express');
+// // const morgan = require('morgan');
+// const app = express();
+// const cors = require('cors');
+// app.use(express.json());
+// app.use(cors());
 
-app.use(morgan((tokens, req, res) => JSON.stringify(req.body)))
+// // app.use(morgan((tokens, req, res) => JSON.stringify(req.body)))
+
+const express = require('express')
+const app = express()
+const cors = require('cors');
+
+app.use(express.json()); //
+app.use(cors());
+app.use(express.static('build'))
 
 let persons = [
   {
@@ -45,7 +53,7 @@ app.get('/api/persons', (req, res) => {
   res.json(persons);
 });
 
-app.get('/api/persons/:id', morgan(), (req, res) => {
+app.get('/api/persons/:id', (req, res) => {
   const id = Number(req.params.id);
   const person = persons.find((person) => person.id === id);
   res.json(person);
