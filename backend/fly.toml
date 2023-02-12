@@ -1,12 +1,9 @@
-# fly.toml file generated for misty-mountain-2870 on 2023-02-12T14:53:05-06:00
+# fly.toml file generated for long-river-3846 on 2023-02-12T15:33:27-06:00
 
-app = "misty-mountain-2870"
+app = "long-river-3846"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
-
-[build]
-  builder = "heroku/buildpacks:20"
 
 [env]
   PORT = "8080"
