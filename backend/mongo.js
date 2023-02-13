@@ -24,11 +24,13 @@ const number = process.argv[4];
 
 if (!name && !number) {
   console.log('phonebook:');
-  Person.find({}).then((res) => {
+  Person.find({})
+  .then((res) => {
     res.map(({ name, number }) => {
       console.log(name, number);
     });
-  });
+    mongoose.connection.close()
+  })
 } else {
   const person = new Person({
     name: name,
